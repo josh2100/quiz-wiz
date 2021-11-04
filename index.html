@@ -5,21 +5,57 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="./assets/css/style.css" />
-    <title>Document</title>
+    <!-- bootstrap stylesheet -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css"
+    />
+    <!-- jquery link -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/themes/base/jquery-ui.min.css"
+    />
+    <!-- your stylesheet -->
+    <!-- <link rel="stylesheet" href="./assets/css/style.css" /> -->
+    <title>Coding Quiz Challenge</title>
   </head>
+
   <body>
-    <header class="">
-      <a class="" href="highscores.html">
-        <h2 class="scores">View Highscores</h2></a
-      >
-      <h2 class="timer">Timer</h2>
+    <header class="container-fluid bg-primary">
+      <div class="row">
+        <a class="col-6" href="highscores.html">
+          <h2 class="scores text-body">View Highscores</h2></a
+        >
+        <h2 class="col-6 timer text-right">
+          Timer:<span id="countdown">0</span>
+        </h2>
+      </div>
     </header>
 
-    <main>
-      <h1 class="">Coding Quiz Challenge</h1>
+    <main class="container-fluid">
+      <div class="row bg-info">
+        <h1 class="col-12 text-center m-3">Coding Quiz Challenge</h1>
+      </div>
+
+      <div id="rules-screen" class="">
+        <section class="row bg-info">
+          <div class="col-4 offset-md-4">
+            <p class="">
+              Answer the following JavaScript questions within the time limit.
+              You will be scored based on how much time you have left. Incorrect
+              answers subtract your score by ten. Click the button to begin
+              quiz!
+            </p>
+          </div>
+        </section>
+
+        <button id="start" class="col-6 offset-md-3 bg-success">
+          Start Quiz
+        </button>
+      </div>
     </main>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="./assets/js/script.js"></script>
   </body>
 </html>

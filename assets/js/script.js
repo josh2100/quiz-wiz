@@ -1,3 +1,3 @@
-//
+var countdown = $("#countdown");
 
-console.log("test link");
+countdown.text(66);
