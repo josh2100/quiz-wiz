@@ -1,6 +1,6 @@
 //global variables
 let countdown = $("#countdown");
-let timeLeft = 5;
+let timeLeft = 500;
 let startPageArray = [];
 let currentQuestion = "question";
 // let restartTestButton = [
@@ -11,19 +11,18 @@ let currentQuestion = "question";
 
 let questionArray = [
   {
-    question: 0,
+    title: "What is Josh's favorite fruit?",
     answer1: "apple",
-    answer2: "orange",
+    answer2: "mango",
+    correctAnswer: 1,
   },
 ];
 
 //functions
 
-// captures HTML at start
+// captures HTML at start, so it can be replace when game ends
 let recordStartPage = function () {
   startPageArray = $("main").html();
-  //test with console
-  // console.log(startPageArray);
 };
 
 // Wait for document to render
@@ -37,19 +36,6 @@ $(document).ready(() => {
   // RESTART BUTTON
 });
 
-/// time functionality///////
-let clock = () => {
-  if (timeLeft) {
-    timeLeft--;
-    countdown.text(timeLeft);
-  } else {
-    //end game
-    console.log("end time");
-    clearInterval(interval);
-  }
-};
-// start timer
-let interval = setInterval(clock, 1000);
 //////////////
 
 /// BUILD QUESTION TEMPLATE
@@ -58,18 +44,41 @@ let interval = setInterval(clock, 1000);
 // make event listeners
 
 buildQuestionTemplate = function () {
+  // Adds question
+  $("main").append("<p id='title' class='col-6 offset-md-3'></p>");
+  /// Adds answer buttons
   $("main").append(
-    "<button id='answer1' class='col-3 offset-md-3'>ANSWER1</button>"
+    "<button id='answer1' class='col-4 offset-md-4'>ANSWER1</button>"
   );
   $("main").append(
-    "<button id='answer2' class='col-3 offset-md-3'>ANSWER2</button>"
+    "<button id='answer2' class='col-4 offset-md-4'>ANSWER2</button>"
   );
+  // Fill in question title
+  $("#title").text(questionArray[0].title);
+  // Fill in possible answers
+  $("#answer1").text(questionArray[0].answer1);
+  $("#answer2").text(questionArray[0].answer2);
 };
 
 // START GAME
 let startGame = function () {
-  // alert("works!");
-  $("main").html(questionArray[0].answer1);
+  // Clear screen
+  $("main").html("");
+
+  // Start timer
+  /// time functionality///////
+  let clock = () => {
+    if (timeLeft) {
+      timeLeft--;
+      countdown.text(timeLeft);
+    } else {
+      //end game
+      console.log("end time");
+      clearInterval(interval);
+    }
+  };
+  // start timer
+  let interval = setInterval(clock, 1000);
 
   // Build question template
   buildQuestionTemplate();

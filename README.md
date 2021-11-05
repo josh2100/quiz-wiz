@@ -19,3 +19,17 @@ WHEN all questions are answered or the timer reaches 0
 THEN the game is over
 WHEN the game is over
 THEN I can save my initials and score
+
+/// time functionality///////
+let clock = () => {
+if (timeLeft) {
+timeLeft--;
+countdown.text(timeLeft);
+} else {
+//end game
+console.log("end time");
+clearInterval(interval);
+}
+};
+// start timer
+let interval = setInterval(clock, 1000);
