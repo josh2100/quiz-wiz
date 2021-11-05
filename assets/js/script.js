@@ -3,6 +3,11 @@ let countdown = $("#countdown");
 let timeLeft = 5;
 let startPageArray = [];
 let currentQuestion = "question";
+// let restartTestButton = [
+//   <button id="restart" class="col-6">
+//     RESTART TEST BUTTON
+//   </button>,
+// ];
 
 let questionArray = [
   {
@@ -25,6 +30,11 @@ let recordStartPage = function () {
 $(document).ready(() => {
   recordStartPage();
   console.log(startPageArray);
+  // FIRST BUTTON
+  $("#start-btn").on("click", function () {
+    startGame();
+  });
+  // RESTART BUTTON
 });
 
 /// time functionality///////
@@ -42,10 +52,36 @@ let clock = () => {
 let interval = setInterval(clock, 1000);
 //////////////
 
+/// BUILD QUESTION TEMPLATE
+//create template
+// update with real questions, random gen
+// make event listeners
+
+buildQuestionTemplate = function () {
+  $("main").append(
+    "<button id='answer1' class='col-3 offset-md-3'>ANSWER1</button>"
+  );
+  $("main").append(
+    "<button id='answer2' class='col-3 offset-md-3'>ANSWER2</button>"
+  );
+};
+
 // START GAME
 let startGame = function () {
   // alert("works!");
   $("main").html(questionArray[0].answer1);
+
+  // Build question template
+  buildQuestionTemplate();
+
+  // Create restart button
+  $("main").append(
+    "<button id='restart' class='col-6 offset-md-3'>RESTART TEST BUTTON</button>"
+  );
+  // Add event listener to restart button
+  $("#restart").on("click", function () {
+    restartGame();
+  });
 };
 
 // RESTART GAME
@@ -56,11 +92,6 @@ let restartGame = function () {
     startGame();
   });
 };
-
-// FIRST BUTTON
-$("#start-btn").on("click", function () {
-  startGame();
-});
 
 // let questionHolder = $("main").append("<p>Test</p>");
 // $("questionHolder").; add class col
