@@ -1,8 +1,16 @@
 //global variables
-
 let countdown = $("#countdown");
 let timeLeft = 5;
 let startPageArray = [];
+let currentQuestion = "question";
+
+let questionArray = [
+  {
+    question: 0,
+    answer1: "apple",
+    answer2: "orange",
+  },
+];
 
 //functions
 
@@ -16,6 +24,7 @@ let recordStartPage = function () {
 // Wait for document to render
 $(document).ready(() => {
   recordStartPage();
+  console.log(startPageArray);
 });
 
 /// time functionality///////
@@ -35,13 +44,17 @@ let interval = setInterval(clock, 1000);
 
 // START GAME
 let startGame = function () {
-  alert("works!");
-  $("main").html("<p>QUESTION HOLDER</p>");
+  // alert("works!");
+  $("main").html(questionArray[0].answer1);
 };
 
 // RESTART GAME
 let restartGame = function () {
   $("main").html(startPageArray);
+  // Re-Apply Event Listener
+  $("#start-btn").on("click", function () {
+    startGame();
+  });
 };
 
 // FIRST BUTTON
