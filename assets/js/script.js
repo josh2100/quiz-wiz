@@ -1,7 +1,25 @@
+//global variables
+
 let countdown = $("#countdown");
 let timeLeft = 5;
+let startPageArray = [];
 
-let tickTock = () => {
+//functions
+
+// captures HTML at start
+let recordStartPage = function () {
+  startPageArray = $("main").html();
+  //test with console
+  // console.log(startPageArray);
+};
+
+// Wait for document to render
+$(document).ready(() => {
+  recordStartPage();
+});
+
+/// time functionality///////
+let clock = () => {
   if (timeLeft) {
     timeLeft--;
     countdown.text(timeLeft);
@@ -11,21 +29,28 @@ let tickTock = () => {
     clearInterval(interval);
   }
 };
-
 // start timer
-let interval = setInterval(tickTock, 1000);
+let interval = setInterval(clock, 1000);
+//////////////
 
+// START GAME
+let startGame = function () {
+  alert("works!");
+  $("main").html("<p>QUESTION HOLDER</p>");
+};
 
+// RESTART GAME
+let restartGame = function () {
+  $("main").html(startPageArray);
+};
 
+// FIRST BUTTON
+$("#start-btn").on("click", function () {
+  startGame();
+});
 
 // let questionHolder = $("main").append("<p>Test</p>");
 // $("questionHolder").; add class col
-
-let startPageArray = [];
-
-startPageArray = $("main").html();
-
-alert(startPageArray);
 
 //remove start page function
 
