@@ -1,41 +1,50 @@
 //global variables
 let countdown = $("#countdown");
 let timeLeft = 500;
-let highScore;
-let highScoreArray;
-[];
 let startPageArray = [];
 let currentQuestion = 0;
+////////GOOOODDDDDDDD
+//https://michael-karen.medium.com/how-to-save-high-scores-in-local-storage-7860baca9d68
+const NO_OF_HIGH_SCORES = 10;
+const HIGH_SCORES = "highScores";
 
-// let loadScores = () => {
-//   $("score1").val(localStorage.getItem("9AM"));
-// };
+function checkHighScore(score) {
+  const highScores = JSON.parse(localStorage.getItem(HIGH_SCORES)) ?? [];
+  const lowestScore = highScores[NO_OF_HIGH_SCORES - 1]?.score ?? 0;
 
-// Save Score
-let saveScore = function () {
-  // let playerName = prompt("Type your name");
-  // let highScore = timeLeft;
+  if (score > lowestScore) {
+    saveHighScore(score, highScores);
+    showHighScores();
+  }
+}
 
-  scoreObject = {
-    name: prompt("Type your name"),
-    highScore: timeLeft,
-  };
+function saveHighScore(score, highScores) {
+  const name = prompt("You got a highscore! Enter name:");
+  const newScore = { score, name };
 
-  localStorage.setItem("score", JSON.stringify(scoreObject));
+  // 1. Add to list
+  highScores.push(newScore);
 
-  // var saveTasks = function () {
-  //   localStorage.setItem("tasks", JSON.stringify(tasks));
-  // };
-};
+  // 2. Sort the list
+  highScores.sort((a, b) => b.score - a.score);
 
-let displayHighscores = function () {
+  // 3. Select new list
+  highScores.splice(NO_OF_HIGH_SCORES);
+
+  // 4. Save to local storage
+  localStorage.setItem(HIGH_SCORES, JSON.stringify(highScores));
+}
+
+let showHighScores = function () {
   // Clear screen
   $("main").html("");
 
   // Display end game screen
   $("main").append("<p id='gameOver' class='col-6 offset-md-3'>Game Over!</p>");
-  $("main").append("<p id='score1' class='col-6 offset-md-3'>Score1</p>");
-  // load function?
+  $("main").append("<h2>HIGH SCORES<h2>");
+  $("main").append("<ol id='highScores'></ol>");
+
+  // highscores.map((score) => `<li>${score.score} — ${score.name}`);
 
   // Create restart button
   $("main").append(
@@ -68,9 +77,10 @@ const questionArray = [
 ];
 
 const endGame = function () {
-  saveScore();
+  checkHighScore(timeLeft);
+  // saveScore();
   timeLeft = 0;
-  displayHighscores();
+  // displayHighscores();
 };
 
 // captures HTML at start, so it can be replace when game ends
