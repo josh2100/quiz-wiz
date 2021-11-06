@@ -1,13 +1,51 @@
 //global variables
 let countdown = $("#countdown");
 let timeLeft = 500;
+let highScore;
+let highScoreArray;
+[];
 let startPageArray = [];
 let currentQuestion = 0;
-// let restartTestButton = [
-//   <button id="restart" class="col-6">
-//     RESTART TEST BUTTON
-//   </button>,
-// ];
+
+// let loadScores = () => {
+//   $("score1").val(localStorage.getItem("9AM"));
+// };
+
+// Save Score
+let saveScore = function () {
+  // let playerName = prompt("Type your name");
+  // let highScore = timeLeft;
+
+  scoreObject = {
+    name: prompt("Type your name"),
+    highScore: timeLeft,
+  };
+
+  localStorage.setItem("score", JSON.stringify(scoreObject));
+
+  // var saveTasks = function () {
+  //   localStorage.setItem("tasks", JSON.stringify(tasks));
+  // };
+};
+
+let displayHighscores = function () {
+  // Clear screen
+  $("main").html("");
+
+  // Display end game screen
+  $("main").append("<p id='gameOver' class='col-6 offset-md-3'>Game Over!</p>");
+  $("main").append("<p id='score1' class='col-6 offset-md-3'>Score1</p>");
+  // load function?
+
+  // Create restart button
+  $("main").append(
+    "<button id='restart' class='col-6 offset-md-3'>RESTART TEST BUTTON</button>"
+  );
+  // Add event listener to restart button
+  $("#restart").on("click", function () {
+    restartGame();
+  });
+};
 
 const questionArray = [
   {
@@ -18,16 +56,25 @@ const questionArray = [
     answer4: "monkey",
     correctAnswer: "answer2",
   },
-
   {
-    title: "Which of the following is an example of string interpolation?",
+    title: "Which of the following is an example of a template literal?",
     answer1: "console.log('do JavaScript quizzes' + num + ' times a day')",
     answer2: "alert('use leetcode' + num+ ' times a week')",
+    answer3: "console.log(`My grandma ${name} still uses Internet Explorer`)",
+    answer4:
+      "window.alert(`My grandma` ${name} `still uses Internet Explorer`)",
+    correctAnswer: "answer3",
   },
 ];
 
+const endGame = function () {
+  saveScore();
+  timeLeft = 0;
+  displayHighscores();
+};
+
 // captures HTML at start, so it can be replace when game ends
-const recordStartPage = function () {
+const recordStartPage = () => {
   startPageArray = $("main").html();
 };
 
@@ -43,17 +90,26 @@ $(document).ready(() => {
 
 /// BUILD QUESTION TEMPLATE
 const buildQuestionTemplate = () => {
+  // Check if there are any more questions
+  const checkIfGameEnd = function () {
+    if (currentQuestion >= questionArray.length) {
+      endGame();
+    } else {
+      buildQuestionTemplate();
+    }
+  };
+
   // Check accuracy functions
   const correct = () => {
-    alert("correct!");
+    // alert("correct!");
     currentQuestion += 1;
-    buildQuestionTemplate();
+    checkIfGameEnd();
   };
   const incorrect = () => {
-    alert("incorrect!");
+    // alert("incorrect!");
     currentQuestion += 1;
     timeLeft -= 100;
-    buildQuestionTemplate();
+    checkIfGameEnd();
   };
 
   // Clear screen
@@ -123,6 +179,10 @@ let startGame = function () {
   // Clear screen
   $("main").html("");
 
+  // Reset variables
+  timeLeft = 500;
+  currentQuestion = 0;
+
   // Start timer
   /// time functionality///////
   let clock = () => {
@@ -159,33 +219,3 @@ let restartGame = function () {
     startGame();
   });
 };
-
-// let questionHolder = $("main").append("<p>Test</p>");
-// $("questionHolder").; add class col
-
-//remove start page function
-
-// build start page function
-
-// create array of objects for questions
-// questions [
-// {name:one
-// answer1: answer1,
-//answer2: answer 2
-// correctanswer:number}
-// ]
-
-/// create question function
-// generates a question
-// takes object properties as arguments
-// this.name then scramble this.answers
-// append child or whatever
-
-// check accuracy
-// when clicked, compare if this.correctanswer = submitted answer
-// stick clicked answer number and correctanswer in an array
-
-//.hide() .show()
-// sdafsadf
-// sdafsadfadsf
-// asdf
