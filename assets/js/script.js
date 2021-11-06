@@ -2,33 +2,38 @@
 let countdown = $("#countdown");
 let timeLeft = 500;
 let startPageArray = [];
-let currentQuestion = "question";
+let currentQuestion = 0;
 // let restartTestButton = [
 //   <button id="restart" class="col-6">
 //     RESTART TEST BUTTON
 //   </button>,
 // ];
 
-let questionArray = [
+const questionArray = [
   {
     title: "What is Josh's favorite fruit?",
     answer1: "apple",
     answer2: "mango",
-    correctAnswer: 1,
+    answer3: "banana",
+    answer4: "monkey",
+    correctAnswer: "answer2",
+  },
+
+  {
+    title: "Which of the following is an example of string interpolation?",
+    answer1: "console.log('do JavaScript quizzes' + num + ' times a day')",
+    answer2: "alert('use leetcode' + num+ ' times a week')",
   },
 ];
 
-//functions
-
 // captures HTML at start, so it can be replace when game ends
-let recordStartPage = function () {
+const recordStartPage = function () {
   startPageArray = $("main").html();
 };
 
 // Wait for document to render
 $(document).ready(() => {
   recordStartPage();
-  console.log(startPageArray);
   // FIRST BUTTON
   $("#start-btn").on("click", function () {
     startGame();
@@ -36,28 +41,81 @@ $(document).ready(() => {
   // RESTART BUTTON
 });
 
-//////////////
-
 /// BUILD QUESTION TEMPLATE
-//create template
-// update with real questions, random gen
-// make event listeners
+const buildQuestionTemplate = () => {
+  // Check accuracy functions
+  const correct = () => {
+    alert("correct!");
+    currentQuestion += 1;
+    buildQuestionTemplate();
+  };
+  const incorrect = () => {
+    alert("incorrect!");
+    currentQuestion += 1;
+    timeLeft -= 100;
+    buildQuestionTemplate();
+  };
 
-buildQuestionTemplate = function () {
-  // Adds question
+  // Clear screen
+  $("main").html("");
+
+  // Add question
   $("main").append("<p id='title' class='col-6 offset-md-3'></p>");
-  /// Adds answer buttons
+
+  /// Add answer buttons
   $("main").append(
     "<button id='answer1' class='col-4 offset-md-4'>ANSWER1</button>"
   );
   $("main").append(
     "<button id='answer2' class='col-4 offset-md-4'>ANSWER2</button>"
   );
+  $("main").append(
+    "<button id='answer3' class='col-4 offset-md-4'>ANSWER3</button>"
+  );
+  $("main").append(
+    "<button id='answer4' class='col-4 offset-md-4'>ANSWER4</button>"
+  );
+
   // Fill in question title
-  $("#title").text(questionArray[0].title);
+  $("#title").text(questionArray[currentQuestion].title);
   // Fill in possible answers
-  $("#answer1").text(questionArray[0].answer1);
-  $("#answer2").text(questionArray[0].answer2);
+  $("#answer1").text(questionArray[currentQuestion].answer1);
+  $("#answer2").text(questionArray[currentQuestion].answer2);
+  $("#answer3").text(questionArray[currentQuestion].answer3);
+  $("#answer4").text(questionArray[currentQuestion].answer4);
+
+  // Check accuracy
+  $("#answer1").on("click", function () {
+    if (questionArray[currentQuestion].correctAnswer == "answer1") {
+      correct();
+    } else {
+      incorrect();
+    }
+  });
+
+  $("#answer2").on("click", function () {
+    if (questionArray[currentQuestion].correctAnswer == "answer2") {
+      correct();
+    } else {
+      incorrect();
+    }
+  });
+
+  $("#answer3").on("click", function () {
+    if (questionArray[currentQuestion].correctAnswer == "answer3") {
+      correct();
+    } else {
+      incorrect();
+    }
+  });
+
+  $("#answer4").on("click", function () {
+    if (questionArray[currentQuestion].correctAnswer == "answer4") {
+      correct();
+    } else {
+      incorrect();
+    }
+  });
 };
 
 // START GAME
@@ -74,11 +132,11 @@ let startGame = function () {
     } else {
       //end game
       console.log("end time");
-      clearInterval(interval);
+      clearInterval(increment);
     }
   };
   // start timer
-  let interval = setInterval(clock, 1000);
+  let increment = setInterval(clock, 1000);
 
   // Build question template
   buildQuestionTemplate();
