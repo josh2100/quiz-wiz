@@ -70,7 +70,7 @@ const endGame = function () {
   console.log("game ended");
 };
 
-// captures HTML at start, so it can be replace when game ends
+// Captures HTML at start so it can be replaced when game ends
 const recordStartPage = () => {
   startPageArray = $("main").html();
 };
@@ -78,14 +78,17 @@ const recordStartPage = () => {
 // Wait for document to render
 $(document).ready(() => {
   recordStartPage();
-  // FIRST BUTTON
+
   $("#start-btn").on("click", function () {
     startGame();
   });
-  // RESTART BUTTON
+
+  $("#highscoreChart").on("click", function () {
+    showHighScores();
+    timeLeft = 0;
+  });
 });
 
-/// BUILD QUESTION TEMPLATE
 const buildQuestionTemplate = () => {
   // Check if there are any more questions
   const checkIfGameEnd = function () {
@@ -106,7 +109,6 @@ const buildQuestionTemplate = () => {
   };
   const incorrect = () => {
     console.log(currentQuestion);
-    //// only increment if less than questionarray.length
     currentQuestion += 1;
     timeLeft -= 100;
     checkIfGameEnd();
@@ -174,7 +176,6 @@ const buildQuestionTemplate = () => {
   });
 };
 
-// START GAME
 let startGame = function () {
   // Clear screen
   $("main").html("");
@@ -183,7 +184,6 @@ let startGame = function () {
   timeLeft = 300;
   currentQuestion = 0;
 
-  /// time functionality///////
   //https://www.freecodecamp.org/news/javascript-timers-everything-you-need-to-know-5f31eaa37162/
   let clock = () => {
     if (timeLeft > 1) {
@@ -203,7 +203,7 @@ let startGame = function () {
       console.log("no more questions");
     }
   };
-  // start timer
+  // Start timer
   let increment = setInterval(clock, 1000);
 
   // Build question template
@@ -219,7 +219,6 @@ let startGame = function () {
   });
 };
 
-// RESTART GAME
 let restartGame = function () {
   $("main").html(startPageArray);
   // Re-Apply Event Listener

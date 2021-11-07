@@ -1,5 +1,17 @@
 # Quiz Wiz
 
+Quiz Wiz is JavaScript quiz web application. It features a timed JavaScript quiz with a high score chart saved to local storage. See if you can answer all 20 questions correctly in 5 minutes!
+
+I built this using Bootstrap and jQuery. You can try it in mobile as well!
+
+## Deployment
+
+https://josh2100.github.io/quiz-wiz/
+
+## Screenshot
+
+![Quiz Wiz Screenshot](./assets/images/screenshot.png)
+
 User story
 
 AS A coding boot camp student
@@ -21,7 +33,7 @@ WHEN the game is over
 THEN I can save my initials and score
 
 Add highscore clickability
-Move questions over to their own file for SOC
 Center everything
 Make responsive
 Create Readme with screenshot
+Add more questions
