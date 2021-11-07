@@ -1,6 +1,6 @@
 //global variables
 let countdown = $("#countdown");
-let timeLeft = 10;
+let timeLeft = 100;
 let startPageArray = [];
 let currentQuestion = 0;
 
@@ -52,7 +52,7 @@ let showHighScores = function () {
   const highScoreList = document.getElementById(HIGH_SCORES);
 
   highScoreList.innerHTML = highScores
-    .map((score) => `<li>${score.score} ----------- ${score.name}`)
+    .map((score) => `<li>${score.score} ----------- ${score.name}`)
     .join("");
 
   // Create restart button
@@ -67,7 +67,7 @@ let showHighScores = function () {
 
 const questionArray = [
   {
-    title: "What is Josh's favorite fruit?",
+    title: "What does JSON stand for?",
     answer1: "apple",
     answer2: "mango",
     answer3: "banana",
@@ -84,11 +84,11 @@ const questionArray = [
     correctAnswer: "answer3",
   },
   {
-    title: "Which of the following is an example of a template literal?",
-    answer1: "difficult",
-    answer2: "butt",
-    answer3: "999999",
-    answer4: "text",
+    title: "Select the or operator",
+    answer1: "===",
+    answer2: "&&",
+    answer3: "||",
+    answer4: "==",
     correctAnswer: "answer3",
   },
 ];
@@ -118,6 +118,8 @@ const buildQuestionTemplate = () => {
   const checkIfGameEnd = function () {
     if (currentQuestion >= questionArray.length) {
       endGame();
+    } else if (timeLeft <= 0) {
+      endGame();
     } else {
       buildQuestionTemplate();
     }
@@ -125,14 +127,14 @@ const buildQuestionTemplate = () => {
 
   // Check accuracy functions
   const correct = () => {
-    // alert("correct!");
+    console.log(currentQuestion);
     currentQuestion += 1;
     checkIfGameEnd();
   };
   const incorrect = () => {
-    // alert("incorrect!");
+    console.log(currentQuestion);
     currentQuestion += 1;
-    timeLeft -= 100;
+    timeLeft -= 10;
     checkIfGameEnd();
   };
 
@@ -144,16 +146,16 @@ const buildQuestionTemplate = () => {
 
   /// Add answer buttons
   $("main").append(
-    "<button id='answer1' class='col-4 offset-md-4'>ANSWER1</button>"
+    "<button id='answer1' class='col-4 offset-md-2'>ANSWER1</button>"
   );
   $("main").append(
-    "<button id='answer2' class='col-4 offset-md-4'>ANSWER2</button>"
+    "<button id='answer2' class='col-4 offset-md-2'>ANSWER2</button>"
   );
   $("main").append(
-    "<button id='answer3' class='col-4 offset-md-4'>ANSWER3</button>"
+    "<button id='answer3' class='col-4 offset-md-2'>ANSWER3</button>"
   );
   $("main").append(
-    "<button id='answer4' class='col-4 offset-md-4'>ANSWER4</button>"
+    "<button id='answer4' class='col-4 offset-md-2'>ANSWER4</button>"
   );
 
   // Fill in question title
@@ -204,7 +206,7 @@ let startGame = function () {
   $("main").html("");
 
   // Reset variables
-  timeLeft = 10;
+  timeLeft = 100;
   currentQuestion = 0;
 
   /// time functionality///////
@@ -215,6 +217,7 @@ let startGame = function () {
     } else {
       //end game
       console.log("end time");
+      showHighScores(timeLeft);
       endGame();
       clearInterval(increment);
     }
