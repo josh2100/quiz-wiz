@@ -1,6 +1,6 @@
 //global variables
 let countdown = $("#countdown");
-let timeLeft = 500;
+let timeLeft = 10;
 let startPageArray = [];
 let currentQuestion = 0;
 
@@ -15,6 +15,7 @@ function checkHighScore(score) {
   const lowestScore = highScores[NO_OF_HIGH_SCORES - 1]?.score ?? 0;
 
   if (score > lowestScore) {
+    ////cancel input if no good score?
     saveHighScore(score, highScores);
     showHighScores();
   }
@@ -46,6 +47,7 @@ let showHighScores = function () {
   $("main").append("<h2 class='col-6 offset-md-3'>HIGH SCORES<h2>");
   $("main").append("<ol id='highScores' class='col-6 offset-md-3'></ol>");
 
+  //https://michael-karen.medium.com/how-to-save-high-scores-in-local-storage-7860baca9d68
   const highScores = JSON.parse(localStorage.getItem(HIGH_SCORES)) ?? [];
   const highScoreList = document.getElementById(HIGH_SCORES);
 
@@ -202,17 +204,18 @@ let startGame = function () {
   $("main").html("");
 
   // Reset variables
-  timeLeft = 500;
+  timeLeft = 10;
   currentQuestion = 0;
 
   /// time functionality///////
   let clock = () => {
-    if (timeLeft) {
+    if (timeLeft > 1) {
       timeLeft--;
       countdown.text(timeLeft);
     } else {
       //end game
       console.log("end time");
+      endGame();
       clearInterval(increment);
     }
   };
