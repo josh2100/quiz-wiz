@@ -3,10 +3,12 @@ let countdown = $("#countdown");
 let timeLeft = 500;
 let startPageArray = [];
 let currentQuestion = 0;
-////////GOOOODDDDDDDD
+
 //https://michael-karen.medium.com/how-to-save-high-scores-in-local-storage-7860baca9d68
 const NO_OF_HIGH_SCORES = 10;
 const HIGH_SCORES = "highScores";
+const highScoreString = localStorage.getItem(HIGH_SCORES);
+const highScores = JSON.parse(highScoreString) ?? [];
 
 function checkHighScore(score) {
   const highScores = JSON.parse(localStorage.getItem(HIGH_SCORES)) ?? [];
@@ -21,6 +23,7 @@ function checkHighScore(score) {
 function saveHighScore(score, highScores) {
   const name = prompt("You got a highscore! Enter name:");
   const newScore = { score, name };
+  timeLeft = 0;
 
   // 1. Add to list
   highScores.push(newScore);
@@ -40,11 +43,15 @@ let showHighScores = function () {
   $("main").html("");
 
   // Display end game screen
-  $("main").append("<p id='gameOver' class='col-6 offset-md-3'>Game Over!</p>");
-  $("main").append("<h2>HIGH SCORES<h2>");
-  $("main").append("<ol id='highScores'></ol>");
+  $("main").append("<h2 class='col-6 offset-md-3'>HIGH SCORES<h2>");
+  $("main").append("<ol id='highScores' class='col-6 offset-md-3'></ol>");
 
-  // highscores.map((score) => `<li>${score.score} — ${score.name}`);
+  const highScores = JSON.parse(localStorage.getItem(HIGH_SCORES)) ?? [];
+  const highScoreList = document.getElementById(HIGH_SCORES);
+
+  highScoreList.innerHTML = highScores
+    .map((score) => `<li>${score.score} ----------- ${score.name}`)
+    .join("");
 
   // Create restart button
   $("main").append(
@@ -74,13 +81,18 @@ const questionArray = [
       "window.alert(`My grandma` ${name} `still uses Internet Explorer`)",
     correctAnswer: "answer3",
   },
+  {
+    title: "Which of the following is an example of a template literal?",
+    answer1: "difficult",
+    answer2: "butt",
+    answer3: "999999",
+    answer4: "text",
+    correctAnswer: "answer3",
+  },
 ];
 
 const endGame = function () {
   checkHighScore(timeLeft);
-  // saveScore();
-  timeLeft = 0;
-  // displayHighscores();
 };
 
 // captures HTML at start, so it can be replace when game ends
@@ -193,7 +205,6 @@ let startGame = function () {
   timeLeft = 500;
   currentQuestion = 0;
 
-  // Start timer
   /// time functionality///////
   let clock = () => {
     if (timeLeft) {
