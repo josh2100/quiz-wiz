@@ -19,3 +19,9 @@ WHEN all questions are answered or the timer reaches 0
 THEN the game is over
 WHEN the game is over
 THEN I can save my initials and score
+
+Add highscore clickability
+Move questions over to their own file for SOC
+Center everything
+Make responsive
+Create Readme with screenshot
