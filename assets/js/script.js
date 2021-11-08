@@ -55,12 +55,12 @@ let showHighScores = function () {
   const highScoreList = document.getElementById(HIGH_SCORES);
 
   highScoreList.innerHTML = highScores
-    .map((score) => `<li>${score.score} -------  '    ' ---- ${score.name}`)
+    .map((score) => `<li>${score.score}............${score.name}`)
     .join("");
 
   // Create restart button
   $("main").append(
-    "<button id='restart' class='col-6 offset-md-3 bg-secondary text-white'>Go Back</button>"
+    "<button id='restart' class='col-8 offset-2 col-sm-6 offset-sm-3 col-md-6 offset-md-3 col-lg-4 offset-lg-4 text-white text-center bg-secondary'>Go Back</button>"
   );
   // Add event listener to restart/go back button
   $("#restart").on("click", function () {
@@ -69,7 +69,7 @@ let showHighScores = function () {
 
   // Create clear highscores button
   $("main").append(
-    "<button id='clearScores' class='col-6 offset-md-3 bg-secondary text-white mt-2'>Clear High Scores</button>"
+    "<button id='clearScores' class='col-8 offset-2 col-sm-6 offset-sm-3 col-md-6 offset-md-3 col-lg-4 offset-lg-4 text-white text-center bg-secondary mt-2'>Clear High Scores</button>"
   );
   // Add event listener to restart/go back button
   $("#clearScores").on("click", function () {
@@ -81,8 +81,6 @@ let showHighScores = function () {
 
 const endGame = function () {
   checkHighScore(timeLeft);
-  console.log(timeLeft);
-  console.log("game ended");
 };
 
 // Captures HTML at start so it can be replaced when game ends
@@ -118,12 +116,10 @@ const buildQuestionTemplate = () => {
 
   // Check accuracy functions
   const correct = () => {
-    console.log(currentQuestion);
     currentQuestion += 1;
     checkIfGameEnd();
   };
   const incorrect = () => {
-    console.log(currentQuestion);
     currentQuestion += 1;
     timeLeft -= 10;
     checkIfGameEnd();
@@ -133,7 +129,9 @@ const buildQuestionTemplate = () => {
   $("main").html("");
 
   // Add question
-  $("main").append("<p id='title' class='col-6 offset-md-3 text-white'></p>");
+  $("main").append(
+    "<br><br><p id='title' class='col-8 offset-2 col-sm-6 offset-sm-3 col-md-6 offset-md-3 col-lg-4 offset-lg-4 text-white'></p><br><br>"
+  );
 
   /// Add answer buttons
   $("main").append(
@@ -205,8 +203,6 @@ let startGame = function () {
       timeLeft--;
       countdown.text(timeLeft);
     } else {
-      //end game
-      console.log("end time");
       showHighScores(timeLeft);
       endGame();
       clearInterval(increment);
@@ -215,7 +211,6 @@ let startGame = function () {
     if (!questionArray[currentQuestion]) {
       showHighScores(timeLeft);
       clearInterval(increment);
-      console.log("no more questions");
     }
   };
   // Start timer
@@ -226,6 +221,7 @@ let startGame = function () {
 };
 
 let restartGame = function () {
+  // Loads saved HTML
   $("main").html(startPageArray);
   // Re-Apply Event Listener
   $("#start-btn").on("click", function () {
