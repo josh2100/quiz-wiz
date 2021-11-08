@@ -36,4 +36,3 @@ Add highscore clickability
 Center everything
 Make responsive
 Create Readme with screenshot
-Add more questions

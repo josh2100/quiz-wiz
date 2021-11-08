@@ -43,20 +43,24 @@ let showHighScores = function () {
   $("main").html("");
 
   // Display end game screen
-  $("main").append("<h2 class='col-6 offset-md-3'>HIGH SCORES<h2>");
-  $("main").append("<ol id='highScores' class='col-6 offset-md-3'></ol>");
+  $("main").append(
+    "<h2 class='col-8 offset-2 col-sm-6 offset-sm-3 col-md-6 offset-md-3 col-lg-4 offset-lg-4 text-white text-center'>HIGH SCORES<h2>"
+  );
+  $("main").append(
+    "<ol id='highScores' class='col-8 offset-2 col-sm-6 offset-sm-3 col-md-6 offset-md-3 col-lg-4 offset-lg-4 text-white text-center'></ol>"
+  );
 
   //https://michael-karen.medium.com/how-to-save-high-scores-in-local-storage-7860baca9d68
   const highScores = JSON.parse(localStorage.getItem(HIGH_SCORES)) ?? [];
   const highScoreList = document.getElementById(HIGH_SCORES);
 
   highScoreList.innerHTML = highScores
-    .map((score) => `<li>${score.score} ----------- ${score.name}`)
+    .map((score) => `<li>${score.score} -------  '    ' ---- ${score.name}`)
     .join("");
 
   // Create restart button
   $("main").append(
-    "<button id='restart' class='col-6 offset-md-3'>Go Back</button>"
+    "<button id='restart' class='col-6 offset-md-3 bg-secondary text-white'>Go Back</button>"
   );
   // Add event listener to restart/go back button
   $("#restart").on("click", function () {
@@ -65,7 +69,7 @@ let showHighScores = function () {
 
   // Create clear highscores button
   $("main").append(
-    "<button id='clearScores' class='col-6 offset-md-3'>Clear High Scores</button>"
+    "<button id='clearScores' class='col-6 offset-md-3 bg-secondary text-white mt-2'>Clear High Scores</button>"
   );
   // Add event listener to restart/go back button
   $("#clearScores").on("click", function () {
@@ -129,20 +133,20 @@ const buildQuestionTemplate = () => {
   $("main").html("");
 
   // Add question
-  $("main").append("<p id='title' class='col-6 offset-md-3'></p>");
+  $("main").append("<p id='title' class='col-6 offset-md-3 text-white'></p>");
 
   /// Add answer buttons
   $("main").append(
-    "<button id='answer1' class='col-4 offset-md-4'>ANSWER1</button>"
+    "<button id='answer1' class='col-4 offset-4 offset-md-4 text-white bg-secondary mt-2'>ANSWER1</button>"
   );
   $("main").append(
-    "<button id='answer2' class='col-4 offset-md-4'>ANSWER2</button>"
+    "<button id='answer2' class='col-4 offset-4 offset-md-4 text-white bg-secondary mt-2'>ANSWER2</button>"
   );
   $("main").append(
-    "<button id='answer3' class='col-4 offset-md-4'>ANSWER3</button>"
+    "<button id='answer3' class='col-4 offset-4 offset-md-4 text-white bg-secondary mt-2'>ANSWER3</button>"
   );
   $("main").append(
-    "<button id='answer4' class='col-4 offset-md-4'>ANSWER4</button>"
+    "<button id='answer4' class='col-4 offset-4 offset-md-4 text-white bg-secondary mt-2'>ANSWER4</button>"
   );
 
   // Fill in question title
@@ -219,15 +223,6 @@ let startGame = function () {
 
   // Build question template
   buildQuestionTemplate();
-
-  // Create restart button
-  $("main").append(
-    "<button id='restart' class='col-6 offset-md-3'>RESTART TEST BUTTON</button>"
-  );
-  // Add event listener to restart button
-  $("#restart").on("click", function () {
-    restartGame();
-  });
 };
 
 let restartGame = function () {
