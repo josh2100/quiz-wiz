@@ -58,9 +58,20 @@ let showHighScores = function () {
   $("main").append(
     "<button id='restart' class='col-6 offset-md-3'>Go Back</button>"
   );
-  // Add event listener to restart button
+  // Add event listener to restart/go back button
   $("#restart").on("click", function () {
     restartGame();
+  });
+
+  // Create clear highscores button
+  $("main").append(
+    "<button id='clearScores' class='col-6 offset-md-3'>Clear High Scores</button>"
+  );
+  // Add event listener to restart/go back button
+  $("#clearScores").on("click", function () {
+    alert("Clearing Scores");
+    window.localStorage.removeItem("highScores");
+    window.location.reload();
   });
 };
 
@@ -110,7 +121,7 @@ const buildQuestionTemplate = () => {
   const incorrect = () => {
     console.log(currentQuestion);
     currentQuestion += 1;
-    timeLeft -= 100;
+    timeLeft -= 10;
     checkIfGameEnd();
   };
 
@@ -122,16 +133,16 @@ const buildQuestionTemplate = () => {
 
   /// Add answer buttons
   $("main").append(
-    "<button id='answer1' class='col-4 offset-md-2'>ANSWER1</button>"
+    "<button id='answer1' class='col-4 offset-md-4'>ANSWER1</button>"
   );
   $("main").append(
-    "<button id='answer2' class='col-4 offset-md-2'>ANSWER2</button>"
+    "<button id='answer2' class='col-4 offset-md-4'>ANSWER2</button>"
   );
   $("main").append(
-    "<button id='answer3' class='col-4 offset-md-2'>ANSWER3</button>"
+    "<button id='answer3' class='col-4 offset-md-4'>ANSWER3</button>"
   );
   $("main").append(
-    "<button id='answer4' class='col-4 offset-md-2'>ANSWER4</button>"
+    "<button id='answer4' class='col-4 offset-md-4'>ANSWER4</button>"
   );
 
   // Fill in question title
@@ -143,7 +154,7 @@ const buildQuestionTemplate = () => {
   $("#answer4").text(questionArray[currentQuestion].answer4);
 
   // Check accuracy
-  $("#answer1").on("click", function () {
+  $("#answer1").on("mousedown", function () {
     if (questionArray[currentQuestion].correctAnswer == "answer1") {
       correct();
     } else {
@@ -151,7 +162,7 @@ const buildQuestionTemplate = () => {
     }
   });
 
-  $("#answer2").on("click", function () {
+  $("#answer2").on("mousedown", function () {
     if (questionArray[currentQuestion].correctAnswer == "answer2") {
       correct();
     } else {
@@ -159,7 +170,7 @@ const buildQuestionTemplate = () => {
     }
   });
 
-  $("#answer3").on("click", function () {
+  $("#answer3").on("mousedown", function () {
     if (questionArray[currentQuestion].correctAnswer == "answer3") {
       correct();
     } else {
@@ -167,7 +178,7 @@ const buildQuestionTemplate = () => {
     }
   });
 
-  $("#answer4").on("click", function () {
+  $("#answer4").on("mousedown", function () {
     if (questionArray[currentQuestion].correctAnswer == "answer4") {
       correct();
     } else {

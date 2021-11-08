@@ -18,30 +18,48 @@
   <body class="bg-info">
     <header class="container-fluid">
       <div class="row">
-        <button id="highscoreChart" class="col-2 offset-md-1">
+        <button id="highscoreChart" class="col-3 offset-1 offset-md-1">
           View High Score Chart
         </button>
         <!-- <a class="col-6" href="highscores.html">
           <h2 class="scores text-body">View Highscores</h2></a
         > -->
-        <h2 class="col-6 timer text-right">
-          Timer:<span id="countdown"></span>
-        </h2>
+        <h2 class="offset-5 col-1">Timer:<span id="countdown"></span></h2>
       </div>
     </header>
 
-    <main class="row">
+    <!-- <main class="row"> 
       <h1 class="col-12 text-center m-3">Coding Quiz Challenge</h1>
 
-      <p class="col-4 offset-md-4">
+      <p class="col-4 offset-3 text-center offset-md-4">
         Answer the following JavaScript questions within the time limit. You
         will be scored based on how much time you have left. Incorrect answers
         subtract your score by ten. Click the button to begin quiz!
       </p>
 
-      <button id="start-btn" class="col-6 offset-md-3 bg-success">
-        Start Quiz
-      </button>
+      <div class="row">
+        <button id="start-btn" class="col-4 d-flex justify-content-center">
+          Start Quiz
+        </button>
+      </div>
+    </main> -->
+
+    <main class="container-fluid">
+      <div class="row">
+        <h1 class="col-12 text-center m-3">Coding Quiz Challenge</h1>
+
+        <p class="col-4 offset-3 text-center offset-md-4">
+          Answer the following JavaScript questions within the time limit. You
+          will be scored based on how much time you have left. Incorrect answers
+          subtract your score by ten. Click the button to begin quiz!
+        </p>
+      </div>
+
+      <div class="row">
+        <button id="start-btn" class="col-4 offset-3 text-center offset-md-4">
+          Start Quiz
+        </button>
+      </div>
     </main>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
