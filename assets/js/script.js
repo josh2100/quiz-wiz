@@ -135,16 +135,16 @@ const buildQuestionTemplate = () => {
 
   /// Add answer buttons
   $("main").append(
-    "<button id='answer1' class='col-4 offset-4 offset-md-4 text-white bg-secondary mt-2 p-2'>ANSWER1</button>"
+    "<button id='answer1' class='col-6 offset-3 col-md-6 offset-md-3 text-white bg-secondary mt-2 p-2'>ANSWER1</button>"
   );
   $("main").append(
-    "<button id='answer2' class='col-4 offset-4 offset-md-4 text-white bg-secondary mt-2 p-2'>ANSWER2</button>"
+    "<button id='answer2' class='col-6 offset-3 col-md-6 offset-md-3 text-white bg-secondary mt-2 p-2'>ANSWER2</button>"
   );
   $("main").append(
-    "<button id='answer3' class='col-4 offset-4 offset-md-4 text-white bg-secondary mt-2 p-2'>ANSWER3</button>"
+    "<button id='answer3' class='col-6 offset-3 col-md-6 offset-md-3 text-white bg-secondary mt-2 p-2'>ANSWER3</button>"
   );
   $("main").append(
-    "<button id='answer4' class='col-4 offset-4 offset-md-4 text-white bg-secondary mt-2 p-2'>ANSWER4</button>"
+    "<button id='answer4' class='col-6 offset-3 col-md-6 offset-md-3 text-white bg-secondary mt-2 p-2'>ANSWER4</button>"
   );
 
   // Fill in question title
